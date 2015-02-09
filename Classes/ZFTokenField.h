@@ -16,30 +16,42 @@
 @protocol ZFTokenFieldDataSource <NSObject>
 @required
 - (CGFloat)lineHeightForTokenInField:(ZFTokenField *)tokenField;
+
 - (NSUInteger)numberOfTokenInField:(ZFTokenField *)tokenField;
+
 - (UIView *)tokenField:(ZFTokenField *)tokenField viewForTokenAtIndex:(NSUInteger)index;
 @end
 
 @protocol ZFTokenFieldDelegate <NSObject>
 @optional
 - (CGFloat)tokenMarginInTokenInField:(ZFTokenField *)tokenField;
+
 - (void)tokenField:(ZFTokenField *)tokenField didRemoveTokenAtIndex:(NSUInteger)index;
+
 - (void)tokenField:(ZFTokenField *)tokenField didReturnWithText:(NSString *)text;
+
 - (void)tokenField:(ZFTokenField *)tokenField didTextChanged:(NSString *)text;
+
 - (void)tokenFieldDidBeginEditing:(ZFTokenField *)tokenField;
+
 - (BOOL)tokenFieldShouldEndEditing:(ZFTokenField *)textField;
+
 - (void)tokenFieldDidEndEditing:(ZFTokenField *)tokenField;
 @end
 
-@interface ZFTokenField : UIControl
+@interface ZFTokenField : UIScrollView
 
-@property (nonatomic, weak) IBOutlet id<ZFTokenFieldDataSource> dataSource;
-@property (nonatomic, weak) IBOutlet id<ZFTokenFieldDelegate> delegate;
+@property (nonatomic, weak) IBOutlet id <ZFTokenFieldDataSource> dataSource;
+@property (nonatomic, weak) IBOutlet id <ZFTokenFieldDelegate> tokenDelegate;
 
 @property (nonatomic, strong, readonly) ZFTokenTextField *textField;
 
 - (void)reloadData;
+
+- (void)resetScrollView;
+
 - (NSUInteger)numberOfToken;
+
 - (NSUInteger)indexOfTokenView:(UIView *)view;
 
 @end

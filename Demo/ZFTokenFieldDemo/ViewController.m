@@ -19,14 +19,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     self.tokens = [NSMutableArray array];
-    
+
     self.tokenField.dataSource = self;
-    self.tokenField.delegate = self;
+    self.tokenField.tokenDelegate = self;
     self.tokenField.textField.placeholder = @"Enter here";
     [self.tokenField reloadData];
-    
+
     [self.tokenField.textField becomeFirstResponder];
 }
 
@@ -63,9 +63,9 @@
     UIView *view = nibContents[0];
     UILabel *label = (UILabel *)[view viewWithTag:2];
     UIButton *button = (UIButton *)[view viewWithTag:3];
-    
+
     [button addTarget:self action:@selector(tokenDeleteButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    
+
     label.text = self.tokens[index];
     CGSize size = [label sizeThatFits:CGSizeMake(1000, 40)];
     view.frame = CGRectMake(0, 0, size.width + 97, 40);
@@ -81,8 +81,12 @@
 
 - (void)tokenField:(ZFTokenField *)tokenField didReturnWithText:(NSString *)text
 {
+
     [self.tokens addObject:text];
     [tokenField reloadData];
+//    CGPoint rightOffset = CGPointMake(MAX(self.tokenField.contentSize.width - self.tokenField.bounds.size.width,0),0);
+    [self.tokenField performSelector:@selector(resetScrollView) withObject:nil afterDelay:0.2];
+
 }
 
 - (void)tokenField:(ZFTokenField *)tokenField didRemoveTokenAtIndex:(NSUInteger)index
