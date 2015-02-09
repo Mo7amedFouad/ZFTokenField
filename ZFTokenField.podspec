@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
   s.license      = "MIT"
   s.author             = { "Amornchai Kanokpullwad" => "amornchai.zoon@gmail.com" }
   s.social_media_url   = "http://twitter.com/zoonref"
-  s.platform     = :ios, "7.1"
+  s.platform     = :ios, "7.0"
   s.source       = { :git => "https://github.com/Mo7amedFouad/ZFTokenField"}
   s.source_files  = "Classes", "Classes/**/*.{h,m}"
   s.requires_arc = true
